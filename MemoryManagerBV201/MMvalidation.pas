@@ -1,5 +1,6 @@
 unit MMValidation;
 
+{$mode delphi}
 interface
 
 uses

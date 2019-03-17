@@ -215,19 +215,20 @@ begin
   AddBenchMark(TMultiThreadReallocateBenchmark);
   AddBenchMark(TQuickSortIntArrayThreads);
   AddBenchMark(TQuickSortExtendedArrayThreads);
-  AddBenchMark(TNexusBenchmark1Thread);
-  AddBenchMark(TNexusBenchmark2Threads);
-  AddBenchMark(TNexusBenchmark4Threads);
-  AddBenchMark(TNexusBenchmark8Threads);
-  AddBenchMark(TWildThreads);
-  AddBenchMark(TRawPerformanceMultiThread);
-  AddBenchMark(TManyThreadsTest);
-  AddBenchMark(TStringThreadTest);
-  AddBenchMark(TeLinkBenchmark);
-  AddBenchMark(TeLinkComServerBenchmark);
-  AddBenchMark(TWebbrokerReplayBenchmark);
-  AddBenchMark(TBeyondCompareBenchmark);
-  AddBenchMark(TSingleThreadAllocMemBenchmark);
+
+  //AddBenchMark(TNexusBenchmark1Thread);
+  //AddBenchMark(TNexusBenchmark2Threads);
+  //AddBenchMark(TNexusBenchmark4Threads);
+  //AddBenchMark(TNexusBenchmark8Threads);
+  //AddBenchMark(TWildThreads);
+  //AddBenchMark(TRawPerformanceMultiThread);
+  //AddBenchMark(TManyThreadsTest);
+  //AddBenchMark(TStringThreadTest);
+  //AddBenchMark(TeLinkBenchmark);
+  //AddBenchMark(TeLinkComServerBenchmark);
+  //AddBenchMark(TWebbrokerReplayBenchmark);
+  //AddBenchMark(TBeyondCompareBenchmark);
+  //AddBenchMark(TSingleThreadAllocMemBenchmark);
   {End of benchmark list}
   AddBenchMark(TReplayBenchmark);     // not active by default, added so you can run your own replays
 end;

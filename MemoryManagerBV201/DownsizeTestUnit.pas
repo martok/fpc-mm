@@ -51,11 +51,11 @@ end;
 
 procedure TDownsizeTest.RunBenchmark;
 var
-  i, {n,} LOffset: integer;
+  i, n, LOffset: integer;
 begin
   inherited;
 
-  //for n := 1 to 50 do     // loop added to have more than 1000 MTicks for this benchmark
+//for n := 1 to 50 do     // loop added to have more than 1000 MTicks for this benchmark
   begin
     {Allocate a lot of strings}
     SetLength(FStrings, 3000000);

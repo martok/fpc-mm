@@ -1,5 +1,6 @@
 unit MoveJOHUnit9;
 
+{$mode delphi}
 interface
 
   procedure MoveJOH_PAS_9 (const Source; var Dest; Count : Integer);
@@ -1614,7 +1615,8 @@ asm  {Small (253 Byte) RTL Replacement Candidate}
 @@LargeDone:
   ret
 @@M01:
-  movzx   ecx, [eax]
+  //movzx   ecx, [eax]   
+  mov     ecx, [eax]
   mov     [edx], cl
   ret
 @@M02:

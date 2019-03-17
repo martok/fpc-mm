@@ -1,5 +1,6 @@
 unit LinkedListBenchmark;
 
+{$mode delphi}
 interface
 
 uses

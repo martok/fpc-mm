@@ -1,5 +1,6 @@
 unit SortExtendedArrayBenchmark1Unit;
 
+{$mode delphi}
 interface
 
 uses Windows, BenchmarkClassUnit, Classes, Math;

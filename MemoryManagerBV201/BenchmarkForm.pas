@@ -1,5 +1,6 @@
 unit BenchmarkForm;
 
+{$mode delphi}
 interface
 
 uses
@@ -287,7 +288,7 @@ uses
   AddressSpaceCreepBenchmarkLarge, LinkedListBenchmark, RenameMMForm,
   BenchmarkUtilities, GeneralFunctions, SystemInfoUnit;
 
-{$R *.dfm}
+{$R *.lfm}
 
 {Disables the window ghosting feature for the calling graphical user interface
  (GUI) process. Window ghosting is a Windows Manager feature that lets the user

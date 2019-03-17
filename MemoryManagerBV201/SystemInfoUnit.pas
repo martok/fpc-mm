@@ -1,5 +1,6 @@
 unit SystemInfoUnit;
 
+{$mode delphi}
 interface
 
 {$INCLUDE Defines.inc}

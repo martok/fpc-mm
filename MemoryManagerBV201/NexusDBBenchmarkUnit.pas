@@ -10,6 +10,8 @@
 
 unit NexusDBBenchmarkUnit;
 
+{$mode delphi}
+
 interface
 
 uses Windows, SysUtils, Classes, BenchmarkClassUnit, Math;

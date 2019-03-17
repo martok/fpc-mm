@@ -4,8 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, TeEngine, Series, TeeProcs, Chart,
-  ComCtrls, StrUtils, Math, BenchmarkClassUnit;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, TAGraph, TAChartTeeChart, TASeries,
+  TAChartUtils, TASources,
+  ComCtrls, ColorBox, StrUtils, Math, BenchmarkClassUnit;
 
 const
   {The number of kilobytes to add to the usage scores to "smooth out" the
@@ -42,6 +43,9 @@ type
   TBenchmarkGroupResults = array of TBenchmarkGroupResult;
 
   {The graphs form}
+
+  { TfGraphs }
+
   TfGraphs = class(TForm)
     pBottom: TPanel;
     bbClose: TBitBtn;
@@ -55,6 +59,8 @@ type
     Label1: TLabel;
     cbBenchmarks: TComboBox;
     cbResultType: TComboBox;
+    ListChartSource1: TListChartSource;
+    ColorListBox1: TColorListBox;
     procedure GraphOptionChange(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -92,7 +98,7 @@ implementation
 
 uses BenchmarkForm, IniFiles;
 
-{$R *.dfm}
+{$R *.lfm}
 
 //Added for D6 - Perhaps an ifdef for delphi version is needed?
 function PosEx(const SubStr, S: string; Offset: Cardinal = 1): Integer;
@@ -137,7 +143,8 @@ var
 begin
   {Clear current results}
   Chart.Legend.Visible := True;
-  Chart.SeriesList.Clear;
+  Chart.Series.Clear;
+  ListChartSource1.Clear;
   {Get the benchmark group}
   LGroup := FGroupResults[cbBenchmarks.ItemIndex];
   {Show summary or detail?}
@@ -148,11 +155,16 @@ begin
     {Show this MM?}
     if (cbMemoryManager.ItemIndex = 0)
       or (cbMemoryManager.Text = FMMNames[LMMind]) then
-    begin
+    begin                  
       LSeries := THorizBarSeries.Create(Chart);
-      LSeries.BarStyle := bsRectangle;
-      LSeries.ParentChart := Chart;
+      //LSeries.BarStyle := bsRectangle;
+      LSeries.BarOffsetPercent:= LMMind * 100 div (FMMNames.Count+1);
+      LSeries.BarWidthPercent:= 100 div (FMMNames.Count+1);
+      LSeries.BarWidthStyle:= bwPercentMin;
+      Chart.AddSeries(LSeries);
       LSeries.ShowInLegend := True;
+      LSeries.SeriesColor:= RGBToColor(random(255), random(255), random(255)); 
+      LSeries.SeriesColor:= ColorListBox1.Colors[Chart.Series.Count];
       LSeries.Marks.Visible := False;
       LSeries.Title := FMMNames[LMMind];
       {Step through all the benchmarks}
@@ -191,6 +203,8 @@ begin
                 LResultName := LResultName + ' (' + cbResults.Items[LResultInd] + ')';
               {Add the series}
               LSeries.Add(LResult, LResultName, LSeries.SeriesColor);
+              if ListChartSource1.Count < LSeries.Count then
+                ListChartSource1.Add(LSeries.MaxXValue, LSeries.MaxXValue, LResultName);
             end;
           end;
         end;

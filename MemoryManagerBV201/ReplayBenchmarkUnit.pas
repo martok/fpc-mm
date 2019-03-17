@@ -3,6 +3,8 @@
 
 unit ReplayBenchmarkUnit;
 
+{$mode delphi}
+
 interface
 
 uses

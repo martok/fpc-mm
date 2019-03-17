@@ -4,6 +4,7 @@ unit GeneralFunctions;
 // Added DetectCPUType from original MainUnit in FastCodeBenchmarkTool091
 // Added GetCPUFrequence from original MainUnit in FastCodeBenchmarkTool091
 
+{$mode delphi}
 interface
 
 uses

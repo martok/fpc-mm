@@ -25,6 +25,8 @@ unit FastcodeCPUID;
 
 interface
 
+{$mode delphi}
+
 type
   TVendor = (cvUnknown, cvAMD, cvCentaur, cvCyrix, cvIntel,
     cvTransmeta, cvNexGen, cvRise, cvUMC, cvNSC, cvSiS);

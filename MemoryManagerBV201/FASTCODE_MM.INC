@@ -22,4 +22,5 @@
 {.$DEFINE MM_LOCALHEAP}    // disabled... identical to WINMEM
 {.$DEFINE MM_HEAPMM}       // disabled... identical to WINMEM
 
+{$asmmode intel}
 

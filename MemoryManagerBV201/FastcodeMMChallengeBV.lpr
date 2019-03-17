@@ -67,7 +67,7 @@ uses
   // FastMove,   // uncomment if you want to benchmark with FastMove
 
   {Other units}
-  Forms,
+  Forms, tachartlazaruspkg, Interfaces,
   BenchmarkForm in 'BenchmarkForm.pas' {fBenchmark},
   RenameMMForm in 'RenameMMForm.pas' {fRenameMM},
   FragmentationTestUnit in 'FragmentationTestUnit.pas',
@@ -110,6 +110,7 @@ uses
 {$R *.res}
 
 begin
+  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TfBenchmark, fBenchmark);
   Application.Run;

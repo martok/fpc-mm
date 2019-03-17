@@ -71,7 +71,7 @@ begin
   {$IFDEF VER190}Result := 'Highlander';{$ENDIF}
 end;
 
-function GetCPUTicks: Int64;
+function GetCPUTicks: Int64; assembler;
 asm
   rdtsc;
 end;
@@ -101,7 +101,8 @@ begin
   {$IFDEF MM_RECYCLERMM}Result := 'RECYCLERMM';{$ENDIF}
   {$IFDEF MM_RTLMM}Result := 'RTLMM';{$ENDIF}
   {$IFDEF MM_TOPMM}Result := 'TOPMM';{$ENDIF}
-  {$IFDEF MM_WINMEM}Result := 'WINMEM';{$ENDIF}
+  {$IFDEF MM_WINMEM}Result := 'WINMEM';{$ENDIF}   
+  {$IFDEF MM_QMM}Result := 'QMM';{$ENDIF}
 
   // deprecated
   {$IFDEF MM_HEAPMM}Result := 'HEAPMM';{$ENDIF}

@@ -2438,14 +2438,7 @@ begin
   StrLCopy(Buffer, PAnsiChar(CUnknown), Result + 1);
 end;
 
-const
-  INVALID_HANDLE_VALUE = THandle(-1);
-  FileAcc = (S_IRUSR or S_IWUSR or S_IRGRP or S_IWGRP or S_IROTH or S_IWOTH);
 
-function FileCreate(const FileName: string): THandle;
-begin
-  Result := THandle(fpopen(PAnsiChar(UTF8String(FileName)), O_RDWR or O_CREAT or O_TRUNC or O_EXCL, FileAcc));
-end;
 {$endif}
 
 {Writes the module filename to the specified buffer and returns the number of
@@ -3654,6 +3647,7 @@ var
   begin
     {Check that the self pointer as well as parent class self pointer addresses
      are valid}
+    {$ifndef fpc}
     if (ADepth < 1000)
       and IsValidVMTAddress(Pointer(PByte(AClassPointer) + vmtSelfPtr))
       and IsValidVMTAddress(Pointer(PByte(AClassPointer) + vmtParent)) then
@@ -3668,6 +3662,9 @@ var
     end
     else
       Result := False;
+    {$else}
+    Result:= True;
+    {$endif}
   end;
 
 begin
@@ -11862,7 +11859,7 @@ begin
       begin
         {VirtualQuery may fail for addresses >2GB if a large address space is
          not enabled.}
-        FillChar(AMemoryMap[LInd], 65536 - LInd, csSysReserved);
+        FillChar(AMemoryMap[LInd], 65536 - LInd, Byte(csSysReserved));
         Break;
       end;
       {Get the chunk number after the region}
@@ -11873,12 +11870,12 @@ begin
       {Set the status of all the chunks in the region}
       if LMBI.State = MEM_COMMIT then
       begin
-        FillChar(AMemoryMap[LInd], LNextChunk - LInd, csSysAllocated);
+        FillChar(AMemoryMap[LInd], LNextChunk - LInd, Byte(csSysAllocated));
       end
       else
       begin
         if LMBI.State = MEM_RESERVE then
-          FillChar(AMemoryMap[LInd], LNextChunk - LInd, csSysReserved);
+          FillChar(AMemoryMap[LInd], LNextChunk - LInd, Byte(csSysReserved));
       end;
       {Point to the start of the next chunk}
       LInd := LNextChunk;
@@ -12341,6 +12338,7 @@ function CheckCanInstallMemoryManager: Boolean;
 var
   LErrorMessageTitle: array[0..1023] of AnsiChar;
 {$endif}
+  ms: THeapStatus;
 begin
   {Default to error}
   Result := False;
@@ -12385,7 +12383,9 @@ begin
     Exit;
   end;
 {$ifndef POSIX}
-  if GetHeapStatus.TotalAllocated <> 0 then
+  ms:= GetHeapStatus;
+  { TODO : TotalAllocated is never 0 for FPC, usually 126 or 112 }
+  if ms.TotalAllocated {$ifdef fpc}>256{$else}<> 0{$endif} then
   begin
     {Memory has been already been allocated with the RTL MM}
 {$ifdef UseOutputDebugString}

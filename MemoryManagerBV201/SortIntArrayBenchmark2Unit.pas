@@ -1,5 +1,6 @@
 unit SortIntArrayBenchmark2Unit;
 
+{$mode delphi}
 interface
 
 uses Windows, BenchmarkClassUnit, Classes, Math;

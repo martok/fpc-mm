@@ -2,6 +2,7 @@
 
 unit SingleThreadedAllocMem;
 
+{$mode delphi}
 interface
 
 uses Windows, SysUtils, BenchmarkClassUnit, Classes, Math;
