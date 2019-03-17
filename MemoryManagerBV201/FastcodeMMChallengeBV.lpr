@@ -60,6 +60,9 @@ uses
 {$IFDEF MM_PSDMM}
   PSDMemoryManager // Pierre le Riche's PSDMemoryManager v1.xx
 {$ENDIF}
+{$IFDEF MM_QMM}
+  mqmm // Martoks's QuickMM
+{$ENDIF}
 
 // Deliberately cause a compile time error if no valid MM is defined
 {$IFNDEF MM_RTLMM},{$ENDIF}

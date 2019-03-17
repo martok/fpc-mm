@@ -272,6 +272,13 @@ you'll get a message that you should change the source code.
   FastCodeQualityLabel = False;
   DllExtension = 'WIN';
 {$ENDIF}
+{$IFDEF MM_QMM}
+  {Martok's QMM}
+  MemoryManager_Name = 'QuickMM';
+  PassValidations = True;
+  FastCodeQualityLabel = False;
+  DllExtension = 'QuMM';
+{$ENDIF}
 
 
 implementation
